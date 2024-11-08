@@ -1,0 +1,46 @@
+@startuml title Hiprint
+
+entity User{
+    * id (Number) <<PK>>
+    --
+    * email (String)
+    * username (String)
+    * whatsapp_number (String)
+    * password (String)
+    * address (String)
+    * role (Set)
+    * create_at (Datetime)
+}
+
+entity Order{
+    * id (Number) <<PK>>
+    * id_user (Number) <<FK>>
+    * id_file (Number) <<FK>>
+    --
+    * status (Set)
+    * price (Number)
+    * delivery_price (Number)
+    * type_service (Set)
+    * time_delivery (Datetime)
+    * location (String)
+    * create_at (Datetime)
+}
+
+entity File{
+    * id(Number) <<PK>>
+    --
+    * link (String)
+    * total_page (Number)
+    * total_BNW (Number)
+    * total_NCL (Number)
+    * total_FCL (Number)
+    * description (String)
+    * size (Set)
+    * mode (Set)
+}
+
+User ||--o{ Order
+User ||--o{ File
+File }|--|| Order
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+|User|
+start
+:Interaksi via WhatsApp;
+:Bot menjawab dengan menu pilihan;
+:User memilih opsi pencetakan;
+|Bot|
+:Bot mengirimkan formulir untuk diisi;
+|User|
+:User mengirimkan formulir dan file;
+|Bot|
+:Bot melakukan konfirmasi pesanan dan verifikasi file;
+|User|
+:User melakukan pembayaran (COD atau Transfer);
+|System|
+:Konfirmasi pembayaran diterima;
+
+|Admin|
+:Admin menginput pesanan baru ke dalam Google Spreadsheet;
+:Admin mulai mencetak sesuai tipe pesanan (COD atau Antar Jemput);
+:Admin menandai pesanan sebagai selesai;
+
+|Admin|
+:Verifikasi pesanan berdasarkan waktu/lokasi pengiriman;
+:Pengiriman barang ke pembeli;
+:Konfirmasi pembayaran (jika COD);
+
+|User|
+:Konfirmasi penerimaan barang ke admin;
+stop
+@enduml
