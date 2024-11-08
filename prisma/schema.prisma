@@ -53,6 +53,7 @@ model User{
   username String @db.VarChar(100)
   password String @db.VarChar(100)
   address String? @db.VarChar(255)
+  whatsapp_number String @db.VarChar(20)
   role Role @default(USER)
   token String? @db.VarChar(100)
   orders Order[]
