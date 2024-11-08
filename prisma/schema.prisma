@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role{
+  USER
+  ADMIN
+}
+
+enum FileStatus{
+  NOTPRINTED
+  PRINTING
+  PRINTED
+  FAILED
+}
+
+enum Size{
+  A4
+  F4
+}
+
+enum Mode{
+  BNW
+  COLOR
+}
+
+enum OrderStatus{
+  PROCESS
+  FINISHED
+  DELIVERY
+  DELIVERED
+  FAILED
+}
+
+enum TypeService{
+  COD
+  BOX
+}
+
+model User{
+  email String @id @db.VarChar(100)
+  username String @db.VarChar(100)
+  password String @db.VarChar(100)
+  address String? @db.VarChar(255)
+  role Role @default(USER)
+  token String? @db.VarChar(100)
+  orders Order[]
+  create_at DateTime @default(now())
+
+  @@map("users")
+}
+
+model File{
+  id Int @id @default(autoincrement())
+  order_id Int
+  order Order @relation(fields: [order_id], references: [id]) 
+  status FileStatus @default(NOTPRINTED)
+  link String @db.VarChar(100)
+  total_page Int
+  total_BNW Int
+  total_NCL Int
+  total_FCL Int
+  price Int
+  size Size @default(A4)
+  mode Mode @default(COLOR)
+  description String @db.VarChar(255)
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("files")
+}
+
+model Order{
+  id Int @id @default(autoincrement())
+  email_id String @db.VarChar(100)
+  user User @relation(fields: [email_id], references: [email])
+  files File[]
+  status OrderStatus @default(PROCESS)
+  price Int 
+  type_service TypeService 
+  time_delivery DateTime
+  location String @db.VarChar(255)
+  give_receipt Boolean @default(false)
+  description String @db.VarChar(255)
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("orders")
+}
+
+
+

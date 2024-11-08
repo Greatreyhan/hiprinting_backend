@@ -1,9 +1,8 @@
 @startuml title Hiprint
 
-entity User{
-    * id (Number) <<PK>>
+entity User{ 
+    * email (String) <<PK>>
     --
-    * email (String)
     * username (String)
     * whatsapp_number (String)
     * password (String)
