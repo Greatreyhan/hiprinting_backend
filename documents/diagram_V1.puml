@@ -9,6 +9,7 @@ entity User{
     * password (String)
     * address (String)
     * role (Set)
+    * token (String)
     * create_at (Datetime)
 }
 
@@ -23,20 +24,27 @@ entity Order{
     * type_service (Set)
     * time_delivery (Datetime)
     * location (String)
+    * give_receipt (Boolean)
+    * description (String)
     * create_at (Datetime)
+    * update_at (Datetime)
 }
 
 entity File{
     * id(Number) <<PK>>
     --
+    * status (Set)
     * link (String)
     * total_page (Number)
     * total_BNW (Number)
     * total_NCL (Number)
     * total_FCL (Number)
-    * description (String)
+    * price (Number)
     * size (Set)
     * mode (Set)
+    * description (String)
+    * create_at (Datetime)
+    * update_at (Datetime)
 }
 
 User ||--o{ Order
